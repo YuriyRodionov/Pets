@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique()->nullable();
-            $table->bigInteger('phone')->unique();
-            $table->foreignId('user_role')->default('1')->constrained('users_roles');
+            $table->string('phone')->unique();
+            $table->enum('users_role', ['applicant', 'executor'])->default('applicant');
             $table->string('passport_number')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
