@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ApplicationCreateRequest;
-use App\Models\Application;
+use App\Http\Requests\UserCreateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class ApplicationController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return Application::all();
+        return User::all();
     }
 
     /**
@@ -34,11 +35,19 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApplicationCreateRequest $request, Application $application)
+    public function store(UserCreateRequest $request, User $user)
     {
         $request->validated();
 
-        $application->fill($request->validated())->save();
+        $data = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'passport_number' => $request->passport_number,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $data->save();
 
         return response()->json(['massage' => 'ok'], 200);
     }
@@ -51,7 +60,7 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        return Application::find($id);
+        return User::find($id);
     }
 
     /**
