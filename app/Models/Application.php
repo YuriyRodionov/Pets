@@ -17,7 +17,7 @@ class Application extends Model
         'address',
         'description',
         'animal_type_id',
-        'price',
+        'price'
     ];
 
     public function user(): BelongsTo
