@@ -26,10 +26,10 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email',
+            'email' => 'required|string|unique:users,email',
             'phone' => 'required|string',
             'passport_number' => 'required|integer',
-            'password' => ['required', 'string', Password::min(8)],
+            'password' => ['required', 'string', 'confirmed', Password::min(8)],
         ];
     }
 

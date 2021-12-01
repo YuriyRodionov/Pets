@@ -5,7 +5,7 @@ namespace App\Http\Requests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class UserUpdateRequest extends FormRequest
+class UserLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
-            'email' => 'string|email',
-            'phone' => 'string',
-            'passport_number' => 'integer',
-            'password' => ['string', 'confirmed', Password::min(8)],
+            'email' => 'required|string|email',
+            'password' => ['required', 'string', 'confirmed', Password::min(8)],
         ];
     }
 
@@ -41,10 +38,7 @@ class UserUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'имя',
             'email' => 'почта',
-            'phone' => 'телефон',
-            'passport_number' => 'паспорт пользователя',
             'password' => 'пароль'
         ];
     }

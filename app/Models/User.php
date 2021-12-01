@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use phpDocumentor\Reflection\Types\Collection;
 
 class User extends Authenticatable
 {
@@ -34,11 +33,11 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'passport_number',
-        'password',
-        'remember_token',
-    ];
+//    protected $hidden = [
+//        'passport_number',
+//        'password',
+//        'remember_token',
+//    ];
 
     /**
      * The attributes that should be cast.
