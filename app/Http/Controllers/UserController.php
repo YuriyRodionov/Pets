@@ -6,6 +6,7 @@ use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,8 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $user->update($request->validated());
 
         return $user;

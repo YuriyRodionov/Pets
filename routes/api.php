@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnimalTypeController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,17 @@ use App\Http\Controllers\AnimalTypeController;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::apiResources([
     'list' => ApplicationController::class,
-    'users' => UserController::class,
-    'animalType' => AnimalTypeController::class
+    'users' => UserController::class
 ]);
+
+Route::group(['middleware' => ['auth:sanctum']], function (){
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/text', function (){
+        return response(['message' => 'Доступ разрешен'], 201);
+    });
+});
