@@ -9,7 +9,7 @@ GET http://localhost:8000/api/users
 ```
 #### Один пользователь
 ```
-GET http://localhost:8000/api/users/1
+GET http://localhost:8000/api/users/{id}
 ```
 #### Создать пользователя
 ```
@@ -23,7 +23,7 @@ password : обязательное, текс, min: 8 символов,
 ```
 #### Обновить пользователя
 ```
-PUT http://localhost:8000/api/users/1
+PUT http://localhost:8000/api/users/{id}
 
 name : обязательное, текс, 255 символов
 email : обязательное, текс, email
@@ -33,7 +33,7 @@ password : обязательное, текс, min: 8 символов,
 ```
 #### Удалить пользователя
 ```
-DELETE http://localhost:8000/api/users/1
+DELETE http://localhost:8000/api/users/{id}
 ```
 
 # Заявки
@@ -43,7 +43,7 @@ GET http://localhost:8000/api/list
 ```
 #### Одна заявка
 ```
-GET http://localhost:8000/api/list/1
+GET http://localhost:8000/api/list/{id}
 ```
 #### Создание заявки
 ```
@@ -57,7 +57,7 @@ price : обязательное, текс
 ```
 #### Обновления заявки
 ```
-PUT http://localhost:8000/api/list/1
+PUT http://localhost:8000/api/list/{id}
 
 user_id : обязательное, цыфры
 address : обязательное, текс, max:255 символов
@@ -67,5 +67,5 @@ price : обязательное, текс
 ```
 #### Удалить заявку
 ```
-DELETE http://localhost:8000/api/list/1
+DELETE http://localhost:8000/api/list/{id}
 ```
