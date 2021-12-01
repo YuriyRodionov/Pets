@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Application extends Model
 {
@@ -17,16 +16,16 @@ class Application extends Model
         'address',
         'description',
         'animal_type_id',
-        'price'
+        'price',
     ];
 
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->hasMany(User::class, 'id', 'user_id');
     }
 
-    public function animalType(): BelongsTo
+    public function animalType()
     {
-        return $this->belongsTo(AnimalType::class, 'animal_type_id', 'id');
+        return $this->hasMany(AnimalType::class, 'id', 'animal_type_id');
     }
 }

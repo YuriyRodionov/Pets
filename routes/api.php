@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnimalTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,8 @@ use App\Http\Controllers\UserController;
 //    return $request->user();
 //});
 
-Route::resource('list', ApplicationController::class);
-Route::resource('users', UserController::class);
+Route::apiResources([
+    'list' => ApplicationController::class,
+    'users' => UserController::class,
+    'animalType' => AnimalTypeController::class
+]);
