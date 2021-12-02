@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Application\ApplicationCreateRequest;
+use App\Http\Requests\Application\ApplicationUpdateRequest;
+use App\Http\Resources\ApplicationGetResource;
+use App\Http\Resources\ApplicationResource;
+use App\Models\Application;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ApplicationController extends Controller
 {
@@ -13,17 +19,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ApplicationGetResource::collection(Application::all());
     }
 
     /**
@@ -32,9 +28,13 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApplicationCreateRequest $request, Application $application)
     {
-        //
+        $request->validated();
+
+        $application->fill($request->validated())->save();
+
+        return new ApplicationResource($application);
     }
 
     /**
@@ -45,18 +45,7 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return new ApplicationGetResource(Application::findOrFail($id));
     }
 
     /**
@@ -66,9 +55,11 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApplicationUpdateRequest $request, Application $application)
     {
-        //
+        $application->update($request->validated());
+
+        return $application;
     }
 
     /**
@@ -77,8 +68,10 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Application $application)
     {
-        //
+        $application->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
