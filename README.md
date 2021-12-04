@@ -42,15 +42,15 @@ DELETE /api/users/{id}
 # Заявки
 #### Все заявки
 ```
-GET /api/list
+GET /api/applications
 ```
 #### Одна заявка
 ```
-GET /api/list/{id}
+GET /api/applications/{id}
 ```
 #### Создание заявки
 ```
-POST /api/list
+POST /api/applications
 
 user_id : обязательное, integer
 address : обязательное, string, max:255 символов
@@ -60,7 +60,7 @@ price : обязательное, string
 ```
 #### Обновления заявки
 ```
-PUT /api/list/{id}
+PUT /api/applications/{id}
 
 user_id : обязательное, integer
 address : обязательное, string, max:255 символов
@@ -72,7 +72,7 @@ status : PUBLISHED, IN PROGRESS, DONE
 ```
 #### Удалить заявку
 ```
-DELETE /api/list/{id}
+DELETE /api/applications/{id}
 ```
 
 # Аутентификация
