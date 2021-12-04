@@ -31,6 +31,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => 'string',
             'users_role' => Rule::in(['applicant','executor']),
             'passport_number' => 'integer',
+            'is_admin' => 'boolean',
             'password' => ['string', 'confirmed', Password::min(8)],
         ];
     }
@@ -48,6 +49,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => 'телефон',
             'users_role' => 'роль',
             'passport_number' => 'паспорт пользователя',
+            'is_admin' => 'админ',
             'password' => 'пароль'
         ];
     }

@@ -20,6 +20,7 @@ class UserGetResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'users_role' => $this->users_role,
+            'is_admin' => $this->is_admin,
             'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at
         ];

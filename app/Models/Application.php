@@ -18,12 +18,18 @@ class Application extends Model
         'description',
         'animal_type_id',
         'price',
-        'status'
+        'status',
+        'executor_user_id'
     ];
 
     public function user(): hasMany
     {
         return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
+    public function userExecutor(): hasMany
+    {
+        return $this->hasMany(User::class, 'id', 'executor_user_id');
     }
 
     public function animalType(): hasMany

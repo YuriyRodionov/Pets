@@ -22,6 +22,7 @@ class ApplicationResource extends JsonResource
             "description" => $this->description,
             "price" => $this->price,
             "status" => $this->status,
+            "executor_user_id" => $this->executor_user_id,
             "created_at" => $this->created_at,
         ];
     }

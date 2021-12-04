@@ -30,6 +30,7 @@ class ApplicationUpdateRequest extends FormRequest
             'description' => 'required|string|max:255',
             'animal_type_id' => 'required|integer',
             'price' => 'required|string',
+            'executor_user_id' => 'integer',
             'status' => Rule::in(['PUBLISHED','IN PROGRESS','DONE'])
         ];
     }
@@ -47,6 +48,7 @@ class ApplicationUpdateRequest extends FormRequest
             'description' => 'текс',
             'animal_type_id' => 'картинка',
             'price' => 'цена',
+            'executor_user_id' => 'исполнитель',
             'status' => 'статус'
         ];
     }

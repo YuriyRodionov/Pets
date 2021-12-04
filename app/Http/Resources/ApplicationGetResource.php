@@ -22,6 +22,7 @@ class ApplicationGetResource extends JsonResource
             "description" => $this->description,
             "price" => $this->price,
             "status" => $this->status,
+            "executor_user_id" => UserGetResource::collection($this->userExecutor),
             "created_at" => $this->created_at,
         ];
     }
