@@ -74,6 +74,8 @@ status : PUBLISHED, IN PROGRESS, DONE
 ```
 DELETE /api/list/{id}
 ```
+
+# Аутентификация
 #### Регистрация
 ```
 POST /api/register
