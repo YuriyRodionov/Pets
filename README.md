@@ -1,71 +1,102 @@
 ## API
 ```
-Content-Type: application/json
+'Accept': 'application/json, text/plain, */*'
 ```
 # Пользователи
 #### Все пользователи
 ```
-GET http://localhost:8000/api/users
+GET /api/users
 ```
 #### Один пользователь
 ```
-GET http://localhost:8000/api/users/{id}
+GET /api/users/{id}
 ```
 #### Создать пользователя
 ```
-POST http://localhost:8000/api/users
+POST /api/users
 
-name : обязательное, текс, 255 символов
-email : обязательное, текс, email
-phone : обязательное, текс
-passport_number : обязательное, цыфры
-password : обязательное, текс, min: 8 символов,
+name : обязательное, string, 255 символов
+email : обязательное, string, email
+phone : обязательное, string
+passport_number: string
+password : обязательное, string, min: 8 символов,
+password_confirmation : подтверждения пароля
 ```
 #### Обновить пользователя
 ```
-PUT http://localhost:8000/api/users/{id}
+PUT /api/users/{id}
 
-name : обязательное, текс, 255 символов
-email : обязательное, текс, email
-phone : обязательное, текс
-passport_number : обязательное, цыфры
-password : обязательное, текс, min: 8 символов,
+name : string, 255 символов
+email : string, email
+phone : string
+users_role : 'applicant','executor'
+passport_number : string
+is_admin : boolean
+password : string, min: 8 символов,
 ```
 #### Удалить пользователя
 ```
-DELETE http://localhost:8000/api/users/{id}
+DELETE /api/users/{id}
 ```
 
 # Заявки
 #### Все заявки
 ```
-GET http://localhost:8000/api/list
+GET /api/list
 ```
 #### Одна заявка
 ```
-GET http://localhost:8000/api/list/{id}
+GET /api/list/{id}
 ```
 #### Создание заявки
 ```
-POST http://localhost:8000/api/list
+POST /api/list
 
-user_id : обязательное, цыфры
-address : обязательное, текс, max:255 символов
-description : обязательное, текс, max:255 символов
+user_id : обязательное, integer
+address : обязательное, string, max:255 символов
+description : обязательное, string, max:255 символов
 animal_type_id : обязательное, id c таблицы animal_types
-price : обязательное, текс
+price : обязательное, string
 ```
 #### Обновления заявки
 ```
-PUT http://localhost:8000/api/list/{id}
+PUT /api/list/{id}
 
-user_id : обязательное, цыфры
-address : обязательное, текс, max:255 символов
-description : обязательное, текс, max:255 символов
+user_id : обязательное, integer
+address : обязательное, string, max:255 символов
+description : обязательное, string, max:255 символов
 animal_type_id : обязательное, id c таблицы animal_types
-price : обязательное, текс
+price : обязательное, string
+executor_user_id : integer
+status : PUBLISHED, IN PROGRESS, DONE
 ```
 #### Удалить заявку
 ```
-DELETE http://localhost:8000/api/list/{id}
+DELETE /api/list/{id}
+```
+#### Регистрация
+```
+POST /api/register
+
+name : обязательное, string, 255 символов
+email : обязательное, string, email
+phone : обязательное, string
+passport_number: string
+password : обязательное, string, min: 8 символов
+password_confirmation : подтверждения пароля
+```
+#### Логин
+```
+POST /api/login
+
+email : обязательное, string, email
+password : обязательное, string, min: 8 символов
+```
+#### Выход
+```
+POST /api/logout
+
+HEADER {
+    Authorization: `Bearer <TOKEN>`
+}
 ```
