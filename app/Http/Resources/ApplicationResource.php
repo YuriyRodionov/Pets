@@ -18,7 +18,7 @@ class ApplicationResource extends JsonResource
             "id" => $this->id,
             'user_id' => $this->user_id,
             "address" => $this->address,
-            "animal_type_id" => AnimalTypeResource::collection($this->animalType),
+            "animal_type_id" => $this->animal_type_id,
             "description" => $this->description,
             "price" => $this->price,
             "status" => $this->status,

@@ -22,8 +22,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::apiResources([
-    'list' => ApplicationController::class,
-    'users' => UserController::class
+    'applications' => ApplicationController::class,
+    'users' => UserController::class,
+    'animal-types' => AnimalTypeController::class
 ]);
 
 Route::group(['middleware' => ['auth:sanctum']], function (){

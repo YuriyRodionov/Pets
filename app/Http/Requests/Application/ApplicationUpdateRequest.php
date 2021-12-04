@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Application;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ApplicationUpdateRequest extends FormRequest
 {
@@ -29,6 +30,7 @@ class ApplicationUpdateRequest extends FormRequest
             'description' => 'required|string|max:255',
             'animal_type_id' => 'required|integer',
             'price' => 'required|string',
+            'status' => Rule::in(['PUBLISHED','IN PROGRESS','DONE'])
         ];
     }
 
@@ -44,7 +46,8 @@ class ApplicationUpdateRequest extends FormRequest
             'address' => 'адрес',
             'description' => 'текс',
             'animal_type_id' => 'картинка',
-            'price' => 'цена'
+            'price' => 'цена',
+            'status' => 'статус'
         ];
     }
 }
