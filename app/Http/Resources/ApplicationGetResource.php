@@ -18,10 +18,11 @@ class ApplicationGetResource extends JsonResource
             "id" => $this->id,
             'user_id' => UserGetResource::collection($this->user),
             "address" => $this->address,
-            "animal_type_id" => AnimalTypeResource::collection($this->animalType),
+            "animal_type_id" => $this->animal_type_id,
             "description" => $this->description,
             "price" => $this->price,
             "status" => $this->status,
+            "executor_user_id" => UserGetResource::collection($this->userExecutor),
             "created_at" => $this->created_at,
         ];
     }

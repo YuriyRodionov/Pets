@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Resources\UserGetResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -32,17 +31,20 @@ class UserController extends Controller
     {
         $request->validated();
 
-        $data = new User([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'passport_number' => $request->passport_number,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password)
         ]);
 
-        $data->save();
+        $user->save();
 
-        return new UserResource($data);
+        return response([
+            'message' => 'Пользователь был создан',
+            'data' => new UserResource($user)
+        ], 200);
     }
 
     /**
@@ -63,13 +65,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $user->update($request->validated());
 
-        return $user;
+        // в данном методе почему то не обновляется users_role
+
+        if ($request->password){
+            $user->update(['password' => bcrypt($request->password)]);
+        }
+
+        return response([
+            'message' => 'Данные пользователя были обновлены',
+            'data' => new UserGetResource($user)
+        ], 200);
     }
 
     /**
@@ -82,6 +91,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return response(['Пользователь удален'], 200);
+        return response(['message' => "Пользователь был удален"], 200);
     }
 }

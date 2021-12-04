@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Application\ApplicationCreateRequest;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserLoginRequest;
+use App\Models\Application;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,14 +16,14 @@ class AuthController extends Controller
 {
     public function register (UserCreateRequest $request)
     {
-        $fields = $request->validated();
+        $request->validated();
 
         $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'phone' => $fields['phone'],
-            'passport_number' => $fields['passport_number'],
-            'password' => Hash::make($fields['password']),
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'passport_number' => $request->passport_number,
+            'password' => bcrypt($request->password)
         ]);
 
         $token = $user->createToken('appPets')->plainTextToken;
@@ -38,7 +40,7 @@ class AuthController extends Controller
     {
         $fields = $request->validated();
 
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::query()->where('email', $fields['email'])->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)){
             return response([
@@ -62,6 +64,6 @@ class AuthController extends Controller
 
         return response([
             'message' => 'Вы вышли из системы'
-        ], 201);
+        ], 200);
     }
 }
