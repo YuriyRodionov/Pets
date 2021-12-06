@@ -23,7 +23,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'passport_number' => $request->passport_number,
-            'password' => bcrypt($request->password)
+            'password' => Hash::make($request->newPassword)
         ]);
 
         $token = $user->createToken('appPets')->plainTextToken;
@@ -33,7 +33,7 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response($response, 200);
     }
 
     public function login (UserLoginRequest $request)
@@ -55,7 +55,7 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response($response, 200);
     }
 
     public function logout(Request $request)
