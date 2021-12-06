@@ -29,7 +29,7 @@ class UserCreateRequest extends FormRequest
             'email' => 'required|string|unique:users,email',
             'phone' => 'required|string|unique:users,phone',
             'passport_number' => 'nullable|string',
-            'password' => ['required', 'string', 'confirmed', Password::min(8)],
+            'password' => ['required', 'string', Password::min(8)],
         ];
     }
 

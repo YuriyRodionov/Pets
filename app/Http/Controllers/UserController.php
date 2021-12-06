@@ -8,6 +8,7 @@ use App\Http\Resources\UserGetResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,10 +37,8 @@ class UserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'passport_number' => $request->passport_number,
-            'password' => bcrypt($request->password)
+            'password' => Hash::make($request->password)
         ]);
-
-        $user->save();
 
         return response([
             'message' => 'Пользователь был создан',
@@ -69,7 +68,7 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-        // в данном методе почему то не обновляется users_role
+        // в данном методе почему то не обновляется users_role,is_admin
 
         if ($request->password){
             $user->update(['password' => bcrypt($request->password)]);
