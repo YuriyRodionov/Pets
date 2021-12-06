@@ -25,11 +25,11 @@ class ApplicationUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer',
-            'address' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'animal_type_id' => 'required|integer',
-            'price' => 'required|string',
+            'user_id' => 'integer',
+            'address' => 'string|max:255',
+            'description' => 'string|max:255',
+            'animal_type_id' => 'integer',
+            'price' => 'string',
             'executor_user_id' => 'integer',
             'status' => Rule::in(['PUBLISHED','IN PROGRESS','DONE'])
         ];

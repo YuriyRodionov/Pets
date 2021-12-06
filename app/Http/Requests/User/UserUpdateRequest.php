@@ -32,7 +32,7 @@ class UserUpdateRequest extends FormRequest
             'users_role' => Rule::in(['applicant','executor']),
             'passport_number' => 'integer',
             'is_admin' => 'boolean',
-            'password' => ['string', 'confirmed', Password::min(8)],
+            'password' => ['string', Password::min(8)],
         ];
     }
 

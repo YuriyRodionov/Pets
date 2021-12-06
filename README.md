@@ -1,6 +1,7 @@
 ## API
 ```
 'Accept': 'application/json, text/plain, */*'
+'Content-Type': 'application/json'
 ```
 # Пользователи
 #### Все пользователи
@@ -19,8 +20,7 @@ name : обязательное, string, 255 символов
 email : обязательное, string, email
 phone : обязательное, string
 passport_number: string
-password : обязательное, string, min: 8 символов,
-password_confirmation : подтверждения пароля
+password : обязательное, string, min: 8 символов
 ```
 #### Обновить пользователя
 ```
@@ -62,11 +62,11 @@ price : обязательное, string
 ```
 PUT /api/applications/{id}
 
-user_id : обязательное, integer
-address : обязательное, string, max:255 символов
-description : обязательное, string, max:255 символов
-animal_type_id : обязательное, id c таблицы animal_types
-price : обязательное, string
+user_id : integer
+address : string, max:255 символов
+description : string, max:255 символов
+animal_type_id : id c таблицы animal_types
+price : string
 executor_user_id : integer
 status : PUBLISHED, IN PROGRESS, DONE
 ```
@@ -85,7 +85,6 @@ email : обязательное, string, email
 phone : обязательное, string
 passport_number: string
 password : обязательное, string, min: 8 символов
-password_confirmation : подтверждения пароля
 ```
 #### Логин
 ```
