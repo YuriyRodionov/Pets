@@ -84,7 +84,7 @@ name : обязательное, string, 255 символов
 email : обязательное, string, email
 phone : обязательное, string
 passport_number: string
-password : string, min: 8 символов
+password : обязательное, string, min: 8 символов
 ```
 #### Логин
 ```
