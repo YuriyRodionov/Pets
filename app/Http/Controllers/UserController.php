@@ -68,8 +68,6 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-        // в данном методе почему то не обновляется users_role,is_admin
-
         if ($request->password){
             $user->update(['password' => bcrypt($request->password)]);
         }
