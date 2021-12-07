@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class UserProfileSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->insert($this->getData());
+        \DB::table('user_profiles')->insert($this->getData());
     }
 
     private function getData(): array
@@ -24,11 +24,10 @@ class UserSeeder extends Seeder
         for ($i = 0 ; $i < 5; $i++)
         {
             $data[] = [
-                'name' => $faker->lastName(),
-                'email' => $faker->email(),
-                'password' => $faker->password(),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'user_id' => $i + 1,
+                'phone' => $faker->phoneNumber(),
+                'passport_number' => $faker->numberBetween($int1 = 1000000000, $int2 = 9999999999),
+                'profile_image' => 'http://via.placeholder.com/150x150',
             ];
         }
         return $data;

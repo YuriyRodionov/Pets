@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class MessagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->insert($this->getData());
+        \DB::table('messages')->insert($this->getData());
     }
 
     private function getData(): array
@@ -24,9 +24,9 @@ class UserSeeder extends Seeder
         for ($i = 0 ; $i < 5; $i++)
         {
             $data[] = [
-                'name' => $faker->lastName(),
-                'email' => $faker->email(),
-                'password' => $faker->password(),
+                'from' => 1,
+                'to' => 2,
+                'text' => $faker->text(mt_rand(50, 100)),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

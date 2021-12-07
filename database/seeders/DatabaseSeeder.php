@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AnimalTypeSeeder::class,
             UserSeeder::class,
-            ApplicationSeeder::class
+            ApplicationSeeder::class,
+            UserProfileSeeder::class,
+            MessagesSeeder::class
         ]);
     }
 }
