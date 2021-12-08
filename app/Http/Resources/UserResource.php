@@ -18,12 +18,11 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'phone' => $this->phone,
-            'users_role' => $this->users_role,
             'is_admin' => $this->is_admin,
             'email_verified_at' => $this->email_verified_at,
-            'created_at' => $this->created_at,
-            'application' => ApplicationResource::collection($this->application)
+            'profiles' => UserProfileGetResource::collection($this->user),
+            'application' => ApplicationResource::collection($this->application),
+            'created_at' => $this->created_at
         ];
     }
 }

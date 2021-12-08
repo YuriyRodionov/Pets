@@ -18,7 +18,9 @@ class UserProfile extends Model
      * @var string[]
      */
     protected $fillable = [
+        'user_id',
         'phone',
+        'users_role',
         'passport_number',
         'profile_image',
     ];
@@ -28,5 +30,4 @@ class UserProfile extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-}
 }

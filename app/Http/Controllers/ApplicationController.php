@@ -4,21 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Application\ApplicationCreateRequest;
 use App\Http\Requests\Application\ApplicationUpdateRequest;
+use App\Http\Resources\Application\ApplicationUserStatusResource;
 use App\Http\Resources\ApplicationGetResource;
 use App\Http\Resources\ApplicationResource;
 use App\Models\Application;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 class ApplicationController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
         return ApplicationGetResource::collection(Application::all());
+    }
+
+    /**
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function searchAllStatus($status)
+    {
+        $application = Application::where('status', $status)->get();
+        return ApplicationUserStatusResource::collection($application);
+    }
+
+    /**
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getApplicationStatus($user_id, $status)
+    {
+        $application = Application::where('user_id', $user_id)->where('status', $status)->get();
+        return ApplicationUserStatusResource::collection($application);
     }
 
     /**
@@ -40,12 +62,22 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Application  $application
+     * @return \App\Http\Resources\ApplicationGetResource
      */
     public function show(Application $application)
     {
         return new ApplicationGetResource($application);
+    }
+
+    /**
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getUserApplication($user_id)
+    {
+        $application = Application::where('user_id', $user_id)->get();
+        return ApplicationResource::collection($application);
     }
 
     /**
