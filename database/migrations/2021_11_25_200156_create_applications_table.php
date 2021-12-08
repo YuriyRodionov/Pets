@@ -19,7 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->string('address');
             $table->text('description');
             $table->foreignId('animal_type_id')->constrained('animal_types');
-            $table->string('price');
+            $table->integer('price');
             $table->enum('status', ['PUBLISHED', 'IN PROGRESS', 'DONE'])->default('PUBLISHED');
             $table->timestamps();
         });
