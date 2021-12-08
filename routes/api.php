@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnimalTypeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,13 @@ Route::apiResources([
     'users' => UserController::class,
     'animal-types' => AnimalTypeController::class
 ]);
+
+Route::get('/users/profile/{user_id}', [UserController::class, 'getUserProfile']);
+
+Route::get('/applications/users/{user_id}', [ApplicationController::class, 'getUserApplication']);
+Route::get('/applications/status/{status}', [ApplicationController::class, 'searchAllStatus']);
+Route::get('/applications/users/{user_id}/{status}', [ApplicationController::class, 'getApplicationStatus']);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/logout', [AuthController::class, 'logout']);

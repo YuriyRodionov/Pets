@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\UserGetResource;
+use App\Http\Resources\UserProfileGetResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +17,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -35,9 +37,11 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'passport_number' => $request->passport_number,
             'password' => Hash::make($request->password)
+        ]);
+
+        UserProfile::create([
+            'phone' => $request->phone
         ]);
 
         return response([
@@ -49,12 +53,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\User $user
+     * @return \App\Http\Resources\UserResource
      */
     public function show(User $user)
     {
         return new UserResource($user);
+    }
+
+    /**
+     *
+     * @return UserProfileGetResource
+     */
+    public function getUserProfile($user_id)
+    {
+        $profile = UserProfile::where('user_id', $user_id)->first();
+        return new UserProfileGetResource($profile);
     }
 
     /**

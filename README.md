@@ -12,6 +12,10 @@ GET /api/users
 ```
 GET /api/users/{id}
 ```
+#### Профиль пользователя
+```
+GET /api/users/profile/{user_id}
+```
 #### Создать пользователя
 ```
 POST /api/users
@@ -43,6 +47,20 @@ DELETE /api/users/{id}
 #### Все заявки
 ```
 GET /api/applications
+```
+#### Все заявки со статусом
+```
+GET /api/applications/status/{status}
+@param status [PUBLISHED, IN PROGRESS, DONE] 
+```
+#### Все заявка пользователя
+```
+GET /api/applications/users/{user_id}
+```
+#### Все заявки пользователя со статусом
+```
+GET /api/applications/users/{user_id}/{status}
+@param status [PUBLISHED, IN PROGRESS, DONE]
 ```
 #### Одна заявка
 ```
@@ -83,7 +101,6 @@ POST /api/register
 name : обязательное, string, 255 символов
 email : обязательное, string, email
 phone : обязательное, string
-passport_number: string
 password : обязательное, string, min: 8 символов
 ```
 #### Логин

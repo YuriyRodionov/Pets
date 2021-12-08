@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserLoginRequest;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +20,12 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'passport_number' => $request->passport_number,
             'password' => Hash::make($request->password)
+        ]);
+
+        UserProfile::create([
+            'user_id' => $user->id,
+            'phone' => $request->phone
         ]);
 
         $token = $user->createToken('appPets')->plainTextToken;
