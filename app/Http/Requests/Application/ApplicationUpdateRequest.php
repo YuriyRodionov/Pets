@@ -29,7 +29,7 @@ class ApplicationUpdateRequest extends FormRequest
             'address' => 'string|max:255',
             'description' => 'string|max:255',
             'animal_type_id' => 'integer',
-            'price' => 'string',
+            'price' => 'integer',
             'executor_user_id' => 'integer',
             'status' => Rule::in(['PUBLISHED','IN PROGRESS','DONE'])
         ];

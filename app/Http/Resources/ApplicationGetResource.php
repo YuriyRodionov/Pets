@@ -16,7 +16,7 @@ class ApplicationGetResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            'user_id' => UserGetResource::collection($this->user),
+            'user_id' => $this->user,
             "address" => $this->address,
             "animal_type_id" => $this->animal_type_id,
             "description" => $this->description,

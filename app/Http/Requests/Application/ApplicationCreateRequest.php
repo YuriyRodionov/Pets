@@ -28,7 +28,7 @@ class ApplicationCreateRequest extends FormRequest
             'address' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'animal_type_id' => 'required|integer',
-            'price' => 'required|string',
+            'price' => 'required|integer',
         ];
     }
 
