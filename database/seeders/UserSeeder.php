@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             $data[] = [
                 'name' => $faker->lastName(),
                 'email' => $faker->email(),
-                'password' => $faker->password(),
+                'password' => '12345678',
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
